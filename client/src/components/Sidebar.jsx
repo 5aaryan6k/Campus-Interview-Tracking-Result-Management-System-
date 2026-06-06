@@ -82,7 +82,6 @@ const Sidebar = () => {
       >
         <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>System Active</span>
         <span>Version 1.0.0</span>
-        <span>CAMPUS INTERVIEW TRACKER PLACEMENT MANAGEMENT SYSTEM</span>
       </div>
     </aside>
   );
