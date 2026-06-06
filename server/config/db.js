@@ -5,16 +5,16 @@ let mongoServer = null;
 
 const connectDB = async () => {
   try {
-    let uri = process.env.MONGODB_URI;
+    let url = process.env.MONGODB_URL;
 
-    if (!uri) {
-      console.log('No MONGODB_URI found. Starting local in-memory MongoDB server...');
+    if (!url) {
+      console.log('No MONGODB_URL found. Starting local in-memory MongoDB server...');
       mongoServer = await MongoMemoryServer.create();
-      uri = mongoServer.getUri();
-      console.log(`In-memory MongoDB started at: ${uri}`);
+      url = mongoServer.getUri();
+      console.log(`In-memory MongoDB started at: ${url}`);
     }
 
-    await mongoose.connect(uri);
+    await mongoose.connect(url);
     console.log(`MongoDB Connected: ${mongoose.connection.host}`);
   } catch (err) {
     console.error('Database connection error:', err.message);
