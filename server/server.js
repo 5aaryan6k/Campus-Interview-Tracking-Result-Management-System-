@@ -1,31 +1,56 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import connectDB from './config/db.js';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const { connectDB } = require('./config/db');
 
-import authRoutes from './routes/authRoutes.js';
-import studentRoutes from './routes/studentRoutes.js';
-import companyRoutes from './routes/companyRoutes.js';
-import dashboardRoutes from './routes/dashboardRoutes.js';
-
+// Load environment variables
 dotenv.config();
+
+// Connect to MongoDB
 connectDB();
 
 const app = express();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Welcome Route
 app.get('/', (req, res) => {
-  res.send('API is running...');
+  res.send('Campus Interview Tracking & Result Management System API');
 });
 
-app.use('/api/auth', authRoutes);
-app.use('/api/students', studentRoutes);
-app.use('/api/companies', companyRoutes);
-app.use('/api/dashboard', dashboardRoutes);
+// Mount Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/students', require('./routes/students'));
+app.use('/api/companies', require('./routes/companies'));
+app.use('/api/rounds', require('./routes/rounds'));
+app.use('/api/dashboard', require('./routes/dashboard'));
+
+// 404 Not Found Middleware
+app.use((req, res, next) => {
+  res.status(404).json({ success: false, message: 'API Endpoint not found' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Server error:', err.stack);
+  res.status(500).json({
+    success: false,
+    message: err.message || 'Internal Server Error',
+  });
+});
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+
+const server = app.listen(PORT, () => {
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
 });
 
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Unhandled Rejection Error: ${err.message}`);
+  // Close server & exit process
+  server.close(() => process.exit(1));
+});
