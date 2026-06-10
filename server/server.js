@@ -15,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "campus-interview-tracking-result-management-system-m5ovssvg1.vercel.app"
+    "https://campusinterviewtracker.netlify.app/"
   ],
   credentials: true
 }));
