@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { SiWelcometothejungle } from "react-icons/si";
 import { 
   GraduationCap, 
   ArrowRight, 
@@ -159,8 +160,8 @@ const Landing = () => {
             letterSpacing: '0.05em',
             marginBottom: '28px'
           }}>
-            <Sparkles size={14} />
-            System Live: Mock DB Connected
+            <SiWelcometothejungle size={14} />
+            Welcome to CampusTrack
           </div>
 
           <h1 style={{
