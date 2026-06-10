@@ -155,7 +155,7 @@ npm start
 * Backend: Render
 * Database: MongoDB Atlas
 * URL
-  [![Netlify Status](https://api.netlify.com/api/v1/badges/537860b5-8b4a-4387-b061-147494b41fcb/deploy-status)](https://app.netlify.com/projects/campusinterviewtracker/deploys)
+  [![Netlify Status](https://campusinterviewtracker.netlify.app/)
 
 ---
 
