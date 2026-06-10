@@ -154,8 +154,7 @@ npm start
 * Frontend: Netlify
 * Backend: Render
 * Database: MongoDB Atlas
-* URL
-  [![Netlify Status](https://campusinterviewtracker.netlify.app/)
+* URL: https://campusinterviewtracker.netlify.app/
 
 ---
 
